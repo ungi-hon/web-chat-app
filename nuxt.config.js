@@ -1,8 +1,9 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
+  mode: 'spa',
 
   router: {
-    middleware: 'stats',
+    middleware: ['auth'],
   },
 
   head: {
@@ -19,9 +20,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [
-    // { src: '~plugins/persistedstate.js', ssr: false }
-  ],
+  plugins: [{ src: '~plugins/persistedstate.js', ssr: false }],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
