@@ -3,6 +3,6 @@ export type RootState = {
 }
 
 export type AutoState = {
-  userUid: string
+  isLogin: boolean
   userName: string
 }

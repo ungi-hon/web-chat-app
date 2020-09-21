@@ -1,20 +1,16 @@
 import { Middleware } from '@nuxt/types'
 
-const NOT_LOGIN_PAGE_LIST = ['/login']
-
 const middleware: Middleware = ({ route, store, redirect }) => {
-  const isNotLoginPage = NOT_LOGIN_PAGE_LIST.map((page) => {
-    return page
-  }).includes(route.path)
-
   // NOTE: ログイン不要のページであれば終了
-  if (isNotLoginPage) {
+  if (route.path === '/login') {
     return
   }
+  const { isLogin } = store.state
 
+  console.log(isLogin)
   // NOTE: ログイン状態でなければログインページへ遷移
-  if (!store.getters.userUid) {
-    return redirect('/login')
+  if (!isLogin) {
+    redirect('/login')
   }
 }
 
