@@ -104,7 +104,18 @@ type AccountState = {
   password: string
 }
 
-const useAccount = (store: Context['store'], root: SetupContext['root']) => {
+type UseAccount = {
+  accountState: AccountState
+  googleLogin(): void
+  emailLogin(): void
+  facebookLogin(): void
+  githubLogin(): void
+}
+
+const useAccount = (
+  store: Context['store'],
+  root: SetupContext['root']
+): UseAccount => {
   const router = root.$router
 
   const accountState = reactive<AccountState>({

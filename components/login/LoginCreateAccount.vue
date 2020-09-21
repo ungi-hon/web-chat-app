@@ -64,11 +64,14 @@ export default defineComponent({
       emit('update:isOpenSignUpContent', false)
     }
 
-    const { accountState, emailCreateAccount } = createUseAccount(store, emit)
+    const { createAccountState, emailCreateAccount } = createUseAccount(
+      store,
+      emit
+    )
 
     return {
-      accountState,
-      ...toRefs(accountState),
+      createAccountState,
+      ...toRefs(createAccountState),
       emailCreateAccount,
       onClickSignUpOpenBtn,
     }
@@ -81,11 +84,16 @@ type CreateAccountState = {
   name: string
 }
 
+type UseAccount = {
+  createAccountState: CreateAccountState
+  emailCreateAccount(): void
+}
+
 const createUseAccount = (
   store: Context['store'],
   emit: SetupContext['emit']
-) => {
-  const accountState = reactive<CreateAccountState>({
+): UseAccount => {
+  const createAccountState = reactive<CreateAccountState>({
     email: '',
     password: '',
     name: '',
@@ -94,12 +102,15 @@ const createUseAccount = (
   const emailCreateAccount = () => {
     firebase
       .auth()
-      .createUserWithEmailAndPassword(accountState.email, accountState.password)
+      .createUserWithEmailAndPassword(
+        createAccountState.email,
+        createAccountState.password
+      )
       .then(() => {
         const user = firebase.auth().currentUser
 
         user?.updateProfile({
-          displayName: accountState.name,
+          displayName: createAccountState.name,
         })
 
         store.dispatch('setUserName', user?.displayName)
@@ -112,7 +123,7 @@ const createUseAccount = (
       })
   }
 
-  return { accountState, emailCreateAccount }
+  return { createAccountState, emailCreateAccount }
 }
 </script>
 
