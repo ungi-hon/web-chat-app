@@ -7,7 +7,6 @@ const middleware: Middleware = ({ route, store, redirect }) => {
   }
   const { isLogin } = store.state
 
-  console.log(isLogin)
   // NOTE: ログイン状態でなければログインページへ遷移
   if (!isLogin) {
     redirect('/login')

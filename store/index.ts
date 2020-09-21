@@ -1,29 +1,35 @@
 import { reactive } from 'nuxt-composition-api'
 import { GetterTree, MutationTree, ActionTree } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
-import { RootState, AutoState } from '~/store/types'
+import { RootState, AuthState } from '~/store/types'
 
 export const state = () => {
-  return reactive<AutoState>({
+  return reactive<AuthState>({
     isLogin: false,
+    userUid: '',
     userName: '',
   })
 }
 
-export const mutations: MutationTree<AutoState> = {
+export const mutations: MutationTree<AuthState> = {
   setIsLogin(state, isLogin) {
     state.isLogin = isLogin
+  },
+  setUserUid(state, userUid) {
+    state.userUid = userUid
   },
   setUserName(state, userName) {
     state.userName = userName
   },
 }
 
-export const actions: ActionTree<AutoState, RootState> = {
+export const actions: ActionTree<AuthState, RootState> = {
   nuxtClientInit() {
     createPersistedState()(this)
   },
-
+  setUserUid({ commit }, uid) {
+    commit('setUserUid', uid)
+  },
   setUserName({ commit }, displayName) {
     commit('setUserName', displayName)
   },
@@ -32,7 +38,10 @@ export const actions: ActionTree<AutoState, RootState> = {
   },
 }
 
-export const getters: GetterTree<AutoState, RootState> = {
+export const getters: GetterTree<AuthState, RootState> = {
+  getUserUid(state) {
+    return state.userUid
+  },
   getUserName(state) {
     return state.userName
   },

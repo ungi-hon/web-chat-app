@@ -120,13 +120,14 @@ const useAccount = (store: Context['store'], root: SetupContext['root']) => {
       .then((result) => {
         const user = result.user
 
+        store.dispatch('setUserUid', user?.uid)
         store.dispatch('setUserName', user?.displayName)
         store.dispatch('setIsLogin')
 
         router.push('/')
       })
       .catch((error) => {
-        alert(error)
+        console.log(error) // eslint-disable-line
       })
   }
 
@@ -137,13 +138,14 @@ const useAccount = (store: Context['store'], root: SetupContext['root']) => {
       .then((result) => {
         const user = result.user
 
+        store.dispatch('setUserUid', user?.uid)
         store.dispatch('setUserName', user?.displayName)
         store.dispatch('setIsLogin')
 
         router.push('/')
       })
       .catch((error) => {
-        alert(error)
+        console.log(error) // eslint-disable-line
       })
   }
 
@@ -155,13 +157,14 @@ const useAccount = (store: Context['store'], root: SetupContext['root']) => {
       .then((result) => {
         const user = result.user
 
+        store.dispatch('setUserUid', user?.uid)
         store.dispatch('setUserName', user?.displayName)
         store.dispatch('setIsLogin')
 
         router.push('/')
       })
       .catch((error) => {
-        alert(error)
+        console.log(error) // eslint-disable-line
       })
   }
 
@@ -172,13 +175,15 @@ const useAccount = (store: Context['store'], root: SetupContext['root']) => {
       .signInWithPopup(provider)
       .then((result) => {
         const user = result.user
+
+        store.dispatch('setUserUid', user?.uid)
         store.dispatch('setUserName', user?.displayName)
         store.dispatch('setIsLogin')
 
         router.push('/')
       })
       .catch((error) => {
-        alert(error)
+        console.log(error) // eslint-disable-line
       })
   }
 
