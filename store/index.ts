@@ -8,6 +8,7 @@ export const state = () => {
     isLogin: false,
     userUid: '',
     userName: '',
+    userImage: '',
   })
 }
 
@@ -21,11 +22,20 @@ export const mutations: MutationTree<AuthState> = {
   setUserName(state, userName) {
     state.userName = userName
   },
+  setUserImage(state, userImage) {
+    state.userImage = userImage
+  },
 }
 
 export const actions: ActionTree<AuthState, RootState> = {
   nuxtClientInit() {
     createPersistedState()(this)
+  },
+  setIsLogin({ commit }) {
+    commit('setIsLogin', true)
+  },
+  setIsLogout({ commit }) {
+    commit('setIsLogin', false)
   },
   setUserUid({ commit }, uid) {
     commit('setUserUid', uid)
@@ -33,16 +43,22 @@ export const actions: ActionTree<AuthState, RootState> = {
   setUserName({ commit }, displayName) {
     commit('setUserName', displayName)
   },
-  setIsLogin({ commit }) {
-    commit('setIsLogin', true)
+  setUserImage({ commit }, image) {
+    commit('setUserImage', image)
   },
 }
 
 export const getters: GetterTree<AuthState, RootState> = {
+  getIsLogin(state) {
+    return state.isLogin
+  },
   getUserUid(state) {
     return state.userUid
   },
   getUserName(state) {
     return state.userName
+  },
+  getUserImage(state) {
+    return state.userImage
   },
 }
