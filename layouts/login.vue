@@ -1,21 +1,8 @@
 <template>
-  <div class="wrapper">
-    <navigation />
+  <div>
     <Nuxt />
   </div>
 </template>
-
-<script>
-import { defineComponent } from 'nuxt-composition-api'
-import navigation from '~/components/nav/navigation.vue'
-
-export default defineComponent({
-  components: {
-    navigation,
-  },
-  setup() {},
-})
-</script>
 
 <style>
 html {
@@ -25,9 +12,5 @@ html {
   background-attachment: fixed;
   background-size: cover;
   color: #333;
-}
-
-.wrapper {
-  display: flex;
 }
 </style>
