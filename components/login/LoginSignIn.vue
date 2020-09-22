@@ -131,9 +131,10 @@ const useAccount = (
       .then((result) => {
         const user = result.user
 
+        store.dispatch('setIsLogin')
         store.dispatch('setUserUid', user?.uid)
         store.dispatch('setUserName', user?.displayName)
-        store.dispatch('setIsLogin')
+        store.dispatch('setUserImage', user?.photoURL)
 
         router.push('/')
       })
@@ -149,9 +150,10 @@ const useAccount = (
       .then((result) => {
         const user = result.user
 
+        store.dispatch('setIsLogin')
         store.dispatch('setUserUid', user?.uid)
         store.dispatch('setUserName', user?.displayName)
-        store.dispatch('setIsLogin')
+        store.dispatch('setUserImage', user?.photoURL)
 
         router.push('/')
       })
@@ -168,9 +170,10 @@ const useAccount = (
       .then((result) => {
         const user = result.user
 
+        store.dispatch('setIsLogin')
         store.dispatch('setUserUid', user?.uid)
         store.dispatch('setUserName', user?.displayName)
-        store.dispatch('setIsLogin')
+        store.dispatch('setUserImage', user?.photoURL)
 
         router.push('/')
       })
@@ -187,9 +190,10 @@ const useAccount = (
       .then((result) => {
         const user = result.user
 
+        store.dispatch('setIsLogin')
         store.dispatch('setUserUid', user?.uid)
         store.dispatch('setUserName', user?.displayName)
-        store.dispatch('setIsLogin')
+        store.dispatch('setUserImage', user?.photoURL)
 
         router.push('/')
       })
