@@ -1,19 +1,31 @@
 <template>
   <div class="container">
-    <p class="title is-1 is-spaced">user: {{ $store.getters.getUserName }}</p>
+    <p>ようこそ！ {{ $store.getters.getUserName }}さん</p>
+    <nuxt-link to="/message">メッセージルームへ移動</nuxt-link>
+
+    <button @click="logout()">ログアウト</button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'nuxt-composition-api'
-
-// import firebase from 'firebase'
+import { defineComponent, useContext } from 'nuxt-composition-api'
 
 export default defineComponent({
-  head: {
-    title: 'Sample',
+  setup(_props, { root }) {
+    const { store } = useContext()
+    const router = root.$router
+
+    const logout = () => {
+      store.dispatch('setIsLogout')
+      store.dispatch('setUserUid', '')
+      store.dispatch('setUserName', '')
+      store.dispatch('setUserImage', '')
+      router.push('/login')
+    }
+
+    return { logout }
   },
-  setup() {},
 })
 </script>
-<style></style>
+
+<style lang="scss" scoped></style>
