@@ -6,4 +6,5 @@ export type AuthState = {
   isLogin: boolean
   userUid: string
   userName: string
+  userImage: string
 }
