@@ -23,6 +23,7 @@ import LoginSignIn from '~/components/login/LoginSignIn.vue'
 import LoginCreateAccount from '~/components/login/LoginCreateAccount.vue'
 
 export default defineComponent({
+  layout: 'login',
   head: {
     title: 'Sample',
   },
