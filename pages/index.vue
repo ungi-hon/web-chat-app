@@ -1,8 +1,5 @@
 <template>
   <div class="container">
-    <p>ようこそ！ {{ $store.getters.getUserName }}さん</p>
-    <nuxt-link to="/message">メッセージルームへ移動</nuxt-link>
-
     <button @click="logout()">ログアウト</button>
   </div>
 </template>
@@ -28,4 +25,8 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.container {
+  width: calc(100% - 250px);
+}
+</style>

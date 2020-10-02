@@ -32,7 +32,6 @@
 import { Context } from '@nuxt/types'
 import {
   defineComponent,
-  SetupContext, // eslint-disable-line
   useContext,
   reactive,
   toRefs,
@@ -89,10 +88,7 @@ type UseAccount = {
   emailCreateAccount(): void
 }
 
-const createUseAccount = (
-  store: Context['store'],
-  emit: SetupContext['emit']
-): UseAccount => {
+const createUseAccount = (store: Context['store'], emit: any): UseAccount => {
   const createAccountState = reactive<CreateAccountState>({
     email: '',
     password: '',

@@ -59,6 +59,7 @@ import firebase from '~/plugins/firebase'
 import MessageListItem from '~/components/message/MessageListItem.vue'
 
 export default defineComponent({
+  layout: 'default',
   head: {
     title: 'webチャットアプリ',
   },
@@ -66,7 +67,7 @@ export default defineComponent({
     MessageListItem,
   },
   setup(_props, { root }) {
-    const { store } = useContext()
+    const { store, params } = useContext()
 
     const {
       state,
@@ -74,13 +75,11 @@ export default defineComponent({
       onFocus,
       onBlur,
       isPressedSubmitKey,
-    } = useMessage(store)
-
-    console.log()
+    } = useMessage(store, params)
 
     firebase
       .database()
-      .ref('message/room1')
+      .ref(`message/${params.value.room}`)
       .on('child_added', (snap) => {
         const message = snap.val()
         state.messages.push({
@@ -133,7 +132,7 @@ type UseMessage = {
   isPressedSubmitKey(keyEvent: any): void
 }
 
-const useMessage = (store: Context['store']): UseMessage => {
+const useMessage = (store: Context['store'], params: any): UseMessage => {
   const state = reactive<State>({
     messageContent: '',
     messages: [],
@@ -155,7 +154,7 @@ const useMessage = (store: Context['store']): UseMessage => {
       '00' + String(nowDate.getMinutes())
     ).slice(-2)}`
 
-    firebase.database().ref('message/room1/').push({
+    firebase.database().ref(`message/${params.value.room}`).push({
       message: state.messageContent,
       send_get_time: sendGetTime,
       send_time: sendTime,
@@ -185,11 +184,9 @@ const useMessage = (store: Context['store']): UseMessage => {
 <style lang="scss" scoped>
 .container {
   position: relative;
-  background-color: #fff;
-  width: calc(100% - 300px);
+  background-color: #27292a;
+  width: calc(100% - 250px);
   height: 100vh;
-  background-color: #ffffff;
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
 }
@@ -205,8 +202,7 @@ const useMessage = (store: Context['store']): UseMessage => {
   left: 0;
   width: 100%;
   height: 96px;
-  border: 1px solid #ddd;
-  background: #fff;
+  background: #414141;
 
   .message-text-area {
     > textarea {

@@ -1,5 +1,5 @@
 <template>
-  <li class="message-item">
+  <li v-if="userName" class="message-item">
     <div class="wrapper" :class="`message-item-${messagePosition}`">
       <p class="user-image">
         <img
@@ -43,23 +43,23 @@ export default defineComponent({
   props: {
     message: {
       type: String as () => Props['message'],
-      required: true,
+      default: '',
     },
     sendGetTime: {
       type: Number as () => Props['sendGetTime'],
-      required: true,
+      default: 0,
     },
     sendTime: {
       type: String as () => Props['sendTime'],
-      required: true,
+      default: '',
     },
     userId: {
       type: String as () => Props['userId'],
-      required: true,
+      default: '',
     },
     userName: {
       type: String as () => Props['userName'],
-      required: true,
+      default: '',
     },
     userImage: {
       type: String as () => Props['userImage'],
