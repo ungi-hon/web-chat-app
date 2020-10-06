@@ -1,4 +1,4 @@
-import { reactive } from 'nuxt-composition-api'
+import { reactive } from '@nuxtjs/composition-api'
 import { GetterTree, MutationTree, ActionTree } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import { RootState, AuthState } from '~/store/types'

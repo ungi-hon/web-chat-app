@@ -54,7 +54,8 @@ import {
   toRefs,
   SetupContext, //eslint-disable-line
   useContext,
-} from 'nuxt-composition-api'
+  computed,
+} from '@nuxtjs/composition-api'
 import firebase from '~/plugins/firebase'
 import MessageListItem from '~/components/message/MessageListItem.vue'
 
@@ -75,28 +76,9 @@ export default defineComponent({
       onFocus,
       onBlur,
       isPressedSubmitKey,
-    } = useMessage(store, params)
-
-    firebase
-      .database()
-      .ref(`message/${params.value.room}`)
-      .on('child_added', (snap) => {
-        const message = snap.val()
-        state.messages.push({
-          key: snap.key,
-          sendGetTime: message.send_get_time,
-          sendTime: message.send_time,
-          userId: message.user_id,
-          name: message.display_name,
-          image: message.profile_url,
-          message: message.message,
-        })
-
-        const messageViewer = document.getElementById('message-viewer')
-        root.$nextTick(() => {
-          messageViewer?.scrollTo(0, messageViewer.clientHeight)
-        })
-      })
+      hasMessage,
+      getMessageData,
+    } = useMessage(store, params, root)
 
     return {
       ...toRefs(state),
@@ -104,6 +86,8 @@ export default defineComponent({
       onFocus,
       onBlur,
       isPressedSubmitKey,
+      hasMessage,
+      getMessageData,
     }
   },
 })
@@ -129,14 +113,25 @@ type UseMessage = {
   sendMessage(): void
   onFocus(): void
   onBlur(): void
-  isPressedSubmitKey(keyEvent: any): void
+  isPressedSubmitKey(keyEvent: HTMLInputElement): void
+  hasMessage: any
+  getMessageData(): void
 }
 
-const useMessage = (store: Context['store'], params: any): UseMessage => {
+const useMessage = (
+  store: Context['store'],
+  params: any,
+  root: any
+): UseMessage => {
   const state = reactive<State>({
     messageContent: '',
     messages: [],
     isTextareaFocused: false,
+  })
+
+  const hasMessage = computed(() => {
+    // NOTE: 空白文字のみの場合はメッセージなしと判定
+    return !state.messageContent.match(/^\s*$/)
   })
 
   const onFocus = () => {
@@ -147,6 +142,29 @@ const useMessage = (store: Context['store'], params: any): UseMessage => {
     state.isTextareaFocused = false
   }
 
+  const getMessageData = () => {
+    firebase
+      .database()
+      .ref(`message/${params.value.room}`)
+      .on('child_added', (snap) => {
+        const message = snap.val()
+        state.messages.push({
+          key: snap.key,
+          sendGetTime: message.send_get_time,
+          sendTime: message.send_time,
+          userId: message.user_id,
+          name: message.display_name,
+          image: message.profile_url,
+          message: message.message,
+        })
+
+        const messageViewer = document.getElementById('message-viewer')
+        root.$nextTick(() => {
+          messageViewer?.scrollTo(0, messageViewer.clientHeight)
+        })
+      })
+  }
+
   const sendMessage = () => {
     const nowDate = new Date()
     const sendGetTime = nowDate.getTime()
@@ -155,7 +173,7 @@ const useMessage = (store: Context['store'], params: any): UseMessage => {
     ).slice(-2)}`
 
     firebase.database().ref(`message/${params.value.room}`).push({
-      message: state.messageContent,
+      message: state.messageContent.trim(),
       send_get_time: sendGetTime,
       send_time: sendTime,
       user_id: store.getters.getUserUid,
@@ -178,6 +196,8 @@ const useMessage = (store: Context['store'], params: any): UseMessage => {
     onFocus,
     onBlur,
     isPressedSubmitKey,
+    hasMessage,
+    getMessageData,
   }
 }
 </script>
@@ -185,10 +205,12 @@ const useMessage = (store: Context['store'], params: any): UseMessage => {
 .container {
   position: relative;
   background-color: #27292a;
-  width: calc(100% - 250px);
+  width: calc(100% - 312px);
   height: 100vh;
   display: flex;
   flex-direction: column;
+  margin: 0;
+  max-width: none;
 }
 
 .message-viewer {
@@ -206,10 +228,12 @@ const useMessage = (store: Context['store'], params: any): UseMessage => {
 
   .message-text-area {
     > textarea {
+      background: #414141;
       width: 100%;
       resize: none;
       box-sizing: border-box;
       padding: 10px 15px;
+      border: none;
     }
   }
 

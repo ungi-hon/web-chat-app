@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'nuxt-composition-api'
+import { defineComponent } from '@nuxtjs/composition-api'
 import navigation from '~/components/nav/navigation.vue'
 
 export default defineComponent({
@@ -49,5 +49,22 @@ button,
 input,
 textarea {
   outline: none;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  appearance: none;
+}
+
+input {
+  border: none;
 }
 </style>

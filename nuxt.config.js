@@ -17,7 +17,7 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: ['normalize.css'],
+  css: ['reset-css'],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [{ src: '~plugins/nuxt-client-init.js', ssr: false }],
@@ -29,8 +29,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
-    'nuxt-composition-api',
-    '@nuxtjs/vuetify',
+    '@nuxtjs/composition-api',
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)

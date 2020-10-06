@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from 'nuxt-composition-api'
+import { defineComponent, reactive, toRefs } from '@nuxtjs/composition-api'
 import LoginSignIn from '~/components/login/LoginSignIn.vue'
 import LoginCreateAccount from '~/components/login/LoginCreateAccount.vue'
 

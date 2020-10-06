@@ -1,32 +1,24 @@
 <template>
   <div class="container">
-    <button @click="logout()">ログアウト</button>
+    <p>メッセージを始めましょう。</p>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, useContext } from 'nuxt-composition-api'
+import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  setup(_props, { root }) {
-    const { store } = useContext()
-    const router = root.$router
-
-    const logout = () => {
-      store.dispatch('setIsLogout')
-      store.dispatch('setUserUid', '')
-      store.dispatch('setUserName', '')
-      store.dispatch('setUserImage', '')
-      router.push('/login')
-    }
-
-    return { logout }
+  setup() {
+    return {}
   },
 })
 </script>
 
 <style lang="scss" scoped>
 .container {
-  width: calc(100% - 250px);
+  width: calc(100% - 312px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

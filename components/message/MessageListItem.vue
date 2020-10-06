@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, useContext } from 'nuxt-composition-api'
+import { defineComponent, computed, useContext } from '@nuxtjs/composition-api'
 
 type Props = {
   message: string

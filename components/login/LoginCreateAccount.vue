@@ -11,13 +11,14 @@
         @input="password = $event"
       />
       <DefaultInput type="name" :value="name" @input="name = $event" />
-      <v-btn
+      <button
         rounded
         color="#1273E5"
         class="email-create-account-btn"
         @click="emailCreateAccount"
-        ><p class="submit-btn-text">作成</p></v-btn
       >
+        <p class="submit-btn-text">作成</p>
+      </button>
     </div>
     <div class="sign-up-text-content">
       <button class="sign-up-open-btn" @click="onClickSignUpOpenBtn">
@@ -35,7 +36,7 @@ import {
   useContext,
   reactive,
   toRefs,
-} from 'nuxt-composition-api'
+} from '@nuxtjs/composition-api'
 import firebase from '~/plugins/firebase'
 import LoginSignInLoginBtn from '~/components/login/LoginSignInLoginBtn.vue'
 import DefaultInput from '~/components/modules/DefaultInput.vue'
@@ -131,6 +132,7 @@ const createUseAccount = (store: Context['store'], emit: any): UseAccount => {
   padding: 30px 0;
   background-color: #fff;
   border-radius: 5px;
+  color: #333;
 
   .title-text {
     width: 80%;
@@ -196,6 +198,11 @@ const createUseAccount = (store: Context['store'], emit: any): UseAccount => {
     display: block;
     margin: 30px 0 0 auto;
     font-weight: 800;
+    background-color: #1273e5;
+    padding: 10px 20px;
+    border-radius: 25px;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 
     .submit-btn-text {
       color: #fff;

@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'nuxt-composition-api'
+import { defineComponent, computed } from '@nuxtjs/composition-api'
 
 type Props = {
   type: 'email' | 'password' | 'name'

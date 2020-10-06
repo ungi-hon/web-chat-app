@@ -16,18 +16,14 @@
         :value="password"
         @input="password = $event"
       />
-      <v-btn rounded color="#1273E5" class="email-login-btn" @click="emailLogin"
-        ><p class="submit-btn-text">ログイン</p></v-btn
-      >
+      <button class="email-login-btn" @click="emailLogin">
+        <p class="submit-btn-text">ログイン</p>
+      </button>
     </div>
 
     <p class="separator">または</p>
 
-    <LoginSignInLoginBtn
-      btn-text="google"
-      :outlined="true"
-      @click="googleLogin"
-    />
+    <LoginSignInLoginBtn btn-text="google" @click="googleLogin" />
     <LoginSignInLoginBtn
       btn-text="facebook"
       color="#3B5998"
@@ -51,7 +47,7 @@ import {
   useContext,
   reactive,
   toRefs,
-} from 'nuxt-composition-api'
+} from '@nuxtjs/composition-api'
 import firebase from '~/plugins/firebase'
 import LoginSignInLoginBtn from '~/components/login/LoginSignInLoginBtn.vue'
 import DefaultInput from '~/components/modules/DefaultInput.vue'
@@ -215,6 +211,7 @@ const useAccount = (
   padding: 30px 0;
   background-color: #fff;
   border-radius: 5px;
+  color: #333;
 
   .title-text {
     width: 80%;
@@ -280,6 +277,11 @@ const useAccount = (
     display: block;
     margin: 30px 0 0 auto;
     font-weight: 800;
+    background-color: #1273e5;
+    padding: 10px 20px;
+    border-radius: 25px;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 
     .submit-btn-text {
       color: #fff;

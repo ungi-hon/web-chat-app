@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'nuxt-composition-api'
+import { defineComponent, computed } from '@nuxtjs/composition-api'
 
 type Props = {
   roomName: string
@@ -78,7 +78,6 @@ export default defineComponent({
 .room-item {
   position: relative;
   list-style: none;
-  padding: 20px 15px;
   height: 86px;
 }
 
@@ -92,10 +91,11 @@ export default defineComponent({
 
 .room-name {
   font-weight: bold;
+  margin: 20px 0 0 15px;
 }
 
 .last-message {
-  margin-top: 10px;
+  margin: 15px 0 0 15px;
 }
 
 .time-text {
