@@ -80,6 +80,8 @@ export default defineComponent({
       getMessageData,
     } = useMessage(store, params, root)
 
+    getMessageData()
+
     return {
       ...toRefs(state),
       sendMessage,
@@ -148,6 +150,7 @@ const useMessage = (
       .ref(`message/${params.value.room}`)
       .on('child_added', (snap) => {
         const message = snap.val()
+        console.log(message)
         state.messages.push({
           key: snap.key,
           sendGetTime: message.send_get_time,
@@ -228,6 +231,7 @@ const useMessage = (
 
   .message-text-area {
     > textarea {
+      color: #dadada;
       background: #414141;
       width: 100%;
       resize: none;
